@@ -21,7 +21,7 @@ spec:
           duration: "1m"
       - setWeight: 50
       - pause:
-          duration: "2m"
+          duration: "1m"
       canaryService: demo-canary
       stableService: demo
       trafficRouting:
