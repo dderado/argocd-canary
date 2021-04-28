@@ -18,7 +18,7 @@ spec:
       steps:
       - setWeight: 20
       - pause:
-          duration: "1m"
+          duration: "30s"
       - setWeight: 50
       - pause:
           duration: "1m"
@@ -44,7 +44,7 @@ spec:
     spec:
       containers:
       - name: demo
-        image: argoproj/rollouts-demo:orange
+        image: argoproj/rollouts-demo:blue
         imagePullPolicy: Always
         ports:
         - name: web
