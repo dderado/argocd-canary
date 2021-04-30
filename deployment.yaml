@@ -19,10 +19,9 @@ spec:
       - setWeight: 20
       - pause:
           duration: "1m"
-      - setWeight: 60
+      - setWeight: 50
       - pause:
           duration: "2m"
-   
       canaryService: demo-canary
       stableService: demo
       trafficRouting:
@@ -31,8 +30,8 @@ spec:
             name: istio-vs
             routes:
             - primary # At least one route is required
-  replicas: 5
-revisionHistoryLimit: 2
+  replicas: 4
+  revisionHistoryLimit: 2
   selector:
     matchLabels:
       app: demo
@@ -45,7 +44,7 @@ revisionHistoryLimit: 2
     spec:
       containers:
       - name: demo
-        image: argoproj/rollouts-demo:yellow
+        image: argoproj/rollouts-demo:blue
         imagePullPolicy: Always
         ports:
         - name: web
