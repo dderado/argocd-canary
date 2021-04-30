@@ -23,7 +23,7 @@ spec:
       - pause:
           duration: "2m"
       - pause:
-          duration: {} 
+          duration: "{}" 
       canaryService: demo-canary
       stableService: demo
       trafficRouting:
