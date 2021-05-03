@@ -36,7 +36,7 @@ spec:
   template:
     metadata:
       labels:
-        app: demo
+        app: canary-stg
         version: blue
     spec:
       containers:
@@ -57,7 +57,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: demo
+  name: canary-stg
 spec:
   ports:
   - port: 80
