@@ -1,12 +1,12 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: istio-gateway
+  name: istio-gateway-stg
   labels:
-    app: istio-gateway
+    app: istio-gateway-stg
 spec:
   selector:
-    istio: ingressgateway
+    istio: ingressgatewaystg
   servers:
   - port:
       number: 80
@@ -18,20 +18,20 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: istio-vs
+  name: istio-vs-stg
   labels:
-    app: istio-vs
+    app: istio-vs-stg
 spec:
   hosts:
   - "*"
   gateways:
-  - istio-gateway
+  - istio-gateway-stg
   http:
     - name: primary
       route:
         - destination:
-            host: demo
+            host: canary-stg
           weight: 100
         - destination:
-            host: demo-canary
+            host: canary-stg
           weight: 0

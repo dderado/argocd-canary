@@ -2,9 +2,9 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: demo
+  name: canary-stg
   labels:
-    app: demo
+    app: canary-stg
 spec:
   strategy:
     canary:
@@ -24,14 +24,14 @@ spec:
       trafficRouting:
         istio:
            virtualService: 
-            name: istio-vs
+            name: istio-vs-stg
             routes:
             - primary # At least one route is required
   replicas: 2
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app: demo
+      app: canary-stg
       version: blue
   template:
     metadata:
@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
       - name: demo
-        image: argoproj/rollouts-demo:red
+        image: argoproj/rollouts-demo:blue
         imagePullPolicy: Always
         ports:
         - name: web
@@ -63,19 +63,19 @@ spec:
   - port: 80
     targetPort: 8080
   selector:
-    app: demo
+    app: canary-stg
   type: ClusterIP
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: demo-canary
+  name: canary-stg
 spec:
   ports:
   - port: 80
     targetPort: 8080
   selector:
-    app: demo
+    app: canary-stg
   type: ClusterIP
 ---
 apiVersion: argoproj.io/v1alpha1
